@@ -6,32 +6,24 @@ import java.time.LocalDateTime;
 public class Transaction {
 
     private BigDecimal amount;
-
     private String stock;
-
     private LocalDateTime created;
 
-    private BigDecimal getAmount(){
-        return amount;
+    public Transaction(BigDecimal amount, String stock) {
+        this.amount = amount;
+        this.stock = stock;
+        this.created = LocalDateTime.now();
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
     public String getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
-        this.stock = stock;
-    }
-
     public LocalDateTime getCreated() {
         return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
     }
 }
