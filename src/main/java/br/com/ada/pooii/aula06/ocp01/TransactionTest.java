@@ -8,7 +8,7 @@ public class TransactionTest {
         TransactionManager manager = new TransactionManager();
 
         var t1 = new Transaction(new BigDecimal("1000"), "ADA");
-        var t2 = new Transaction(new BigDecimal("1001"), "ADA");
+        var t2 = new Transaction(new BigDecimal("50"), "ADA");
 
         manager.executeTrade(t1);
         manager.executeTrade(t2);
