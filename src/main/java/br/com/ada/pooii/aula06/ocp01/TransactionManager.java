@@ -5,15 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 public class TransactionManager {
 
-    private List<Validator> validators;
+    private List<Validator> validators = List.of(
+            new MaxDailyLimitValidator(),
+            new MinValueValidator(),
+            new StockForTradeAvailability(),
+            new isAfterWorkingHours());
 
-    public TransactionManager(){
+    //segunda forma de codar o construtor da validação.
+   /* public TransactionManager(){
         validators = new ArrayList<>();
         validators.add(new MaxDailyLimitValidator());
         validators.add(new MinValueValidator());
         validators.add(new StockForTradeAvailability());
         validators.add(new isAfterWorkingHours());
-    }
+    }*/
 
     void executeTrade(Transaction transaction){
         for (Validator validator : validators){
