@@ -1,8 +1,6 @@
 package br.com.ada.pooii.projeto_final;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class TaskService <T> {
 
@@ -40,19 +38,34 @@ public class TaskService <T> {
                 });
     }
 
-    public boolean deleteTask(String title, String taskType) {
+    public boolean deleteTask(int index) {
         List<BaseTask<?>> tasks = taskRepository.getAllTasks();
 
-        for (BaseTask<?> task : tasks) {
-            if (task.getTitle().equals(title) && task.getTaskType().equals(taskType)) {
-                tasks.remove(task);
-                return true; // Task found and deleted
+        if (index >= 0 && index < tasks.size()) {
+            BaseTask<?> removedTask = tasks.remove(index);
+            System.out.println("Task deleted successfully: " + removedTask.getTitle()+ viewAllTasks());
+            return true;
+        } else {
+            System.out.println("Invalid index. Task not found or couldn't be deleted.");
+            return false;
+        }
+    }
+    public List<String> viewAllTasksWithIndex() {
+        List<BaseTask<?>> allTasks = taskRepository.getAllTasks();
+        List<String> taskDetails = new ArrayList<>();
+
+        if (allTasks.isEmpty()) {
+            System.out.println("No tasks found.");
+        } else {
+            for (int i = 0; i < allTasks.size(); i++) {
+                BaseTask<?> task = allTasks.get(i);
+                String taskInfo = "Index: " + i + ", Title: " + task.getTitle() + ", Description: " + task.getDescription();
+                taskDetails.add(taskInfo);
             }
         }
 
-        return false; // Task not found or couldn't be deleted
+        return taskDetails;
     }
-
     public List<String> viewAllTasks() {
         List<BaseTask<?>> allTasks = taskRepository.getAllTasks();
         List<String> taskDetails = new ArrayList<>();
@@ -60,18 +73,16 @@ public class TaskService <T> {
         if (allTasks.isEmpty()) {
             System.out.println("No tasks found.");
         } else {
-            //System.out.println("All Tasks:");
             for (BaseTask<?> task : allTasks) {
                 String taskInfo = "Title: " + task.getTitle() + ", Description: " + task.getDescription();
                 taskDetails.add(taskInfo);
-
             }
         }
 
         return taskDetails;
     }
 
-    public <U> List<BaseTask<U>> searchTasksByTag(String tag, Class<String> taskType) {
+    public <U> List<BaseTask<U>> searchTasksByTag(String tag, Class<U> taskType) {
         if (tag == null || taskType == null) {
             // Handle null parameters if needed
             return Collections.emptyList();
@@ -81,13 +92,16 @@ public class TaskService <T> {
         List<BaseTask<U>> tasksWithTag = new ArrayList<>();
 
         for (BaseTask<?> task : allTasks) {
-            // Case-insensitive tag comparison
-            if (taskType.isInstance(task) && tag.equalsIgnoreCase(task.getTag())) {
+            // Check both tag and taskType
+            if (tag.equalsIgnoreCase(task.getTag()) && taskType.isInstance(task.getTaskType())) {
                 tasksWithTag.add((BaseTask<U>) task);
             }
         }
 
         return tasksWithTag;
+    }
+    public void setTasks(List<BaseTask<?>> tasks) {
+        taskRepository.setAllTasks(tasks);
     }
 
     }

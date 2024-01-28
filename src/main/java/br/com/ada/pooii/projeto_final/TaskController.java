@@ -3,11 +3,11 @@ package br.com.ada.pooii.projeto_final;
 import java.util.List;
 import java.util.Scanner;
 
-public class TaskController implements Console {
+public class TaskController <T> implements Console {
 
-    TaskService<?> taskService;
+    private TaskService<T> taskService;
 
-    public TaskController(TaskService <?> taskService) {
+    public TaskController(TaskService<T> taskService) {
         this.taskService = taskService;
     }
 
@@ -68,7 +68,7 @@ public class TaskController implements Console {
 
         System.out.println("Enter task details for update:");
 
-        System.out.print("Title: ");
+        System.out.print("Title of the task you wish to change: ");
         String title = scanner.nextLine();
 
         System.out.print("New Description: ");
@@ -90,21 +90,34 @@ public class TaskController implements Console {
     public void deleteTask() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter task details for deletion:");
+        viewAllTasksWithIndex(); // Display tasks with indices
 
-        System.out.print("Title: ");
-        String title = scanner.nextLine();
+        System.out.println("Enter the index of the task to delete:");
 
-        System.out.print("Task Type (personal, work, study): ");
-        String taskType = scanner.nextLine();
+        try {
+            int index = Integer.parseInt(scanner.nextLine());
 
-        // Call TaskService to delete the task
-        boolean deleted = taskService.deleteTask(title, taskType);
+            // Call TaskService to delete the task
+            boolean deleted = taskService.deleteTask(index);
 
-        if (deleted) {
-            System.out.println("Task deleted successfully!");
-        } else {
-            System.out.println("Task not found or couldn't be deleted.");
+            if (deleted) {
+                System.out.println("Task deleted successfully!");
+            } else {
+                System.out.println("Invalid index. Task not found or couldn't be deleted.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid index.");
+        }
+    }
+
+    private void viewAllTasksWithIndex() {
+        List<String> taskDetails = taskService.viewAllTasksWithIndex();
+
+        if (!taskDetails.isEmpty()) {
+            System.out.println("Task Details with Index:");
+            for (String taskInfo : taskDetails) {
+                System.out.println(taskInfo);
+            }
         }
     }
 
@@ -118,32 +131,21 @@ public class TaskController implements Console {
             }
         }
     }
-    private <U> void searchTasksByTag() {
+
+
+    private void searchTasksByTag() {
         String tag = getUserInput("Enter the tag to search for");
         String taskType = getUserInput("Enter the task type (personal, work, study)");
 
-
-        List<BaseTask<U>> tasksWithTag;
-
         switch (taskType.toLowerCase()) {
-            case "personal", "work", "study" -> tasksWithTag = taskService.searchTasksByTag(tag, String.class);
-            default -> {
-                System.out.println("Invalid task type. Supported types: personal, work, study");
-                return;
+            case "personal", "work", "study" -> {
+                List<BaseTask<String>> tasksWithTag = taskService.searchTasksByTag(tag, String.class);
+                displayTasks(tasksWithTag);
             }
-        }
-
-        displayTasks2(tasksWithTag);
-    }
-
-
-    private <T > void displayTasks2 (List < BaseTask < T >> tasks) {
-        System.out.println("Tasks with the specified tag:");
-        for (BaseTask<T> task : tasks) {
-            System.out.println("Title: " + task.getTitle() + ", Description: " + task.getDescription() +
-                    ", Deadline: " + task.getDeadline() + ", Tag: " + task.getTag());
+            default -> System.out.println("Invalid task type. Supported types: personal, work, study");
         }
     }
+
 
         private <T > void displayTasks (List < BaseTask < T >> tasks) {
             if (!tasks.isEmpty()) {
