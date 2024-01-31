@@ -1,4 +1,4 @@
-package br.com.ada.pooii.projeto_final;
+package br.com.ada.pooii.projeto_final.model;
 
 public class StudyTask extends BaseTask <String>{
     public StudyTask(String title, String description, String deadline, String tag) {

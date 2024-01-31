@@ -1,6 +1,6 @@
-package br.com.ada.pooii.projeto_final;
+package br.com.ada.pooii.projeto_final.model;
 
-class BaseTask <T>  {
+public class BaseTask <T>  {
     private String title;
     private String description;
     private String deadline;

@@ -1,6 +1,10 @@
 package br.com.ada.pooii.projeto_final;
 
-public class AdaTask {
+import br.com.ada.pooii.projeto_final.controller.TaskController;
+import br.com.ada.pooii.projeto_final.repository.TaskRepository;
+import br.com.ada.pooii.projeto_final.service.TaskService;
+
+public class AdaTaskApplication {
 
     public static void main(String[] args) {
         TaskRepository taskRepository = new TaskRepository();

@@ -1,4 +1,10 @@
-package br.com.ada.pooii.projeto_final;
+package br.com.ada.pooii.projeto_final.service;
+
+import br.com.ada.pooii.projeto_final.model.BaseTask;
+import br.com.ada.pooii.projeto_final.model.PersonalTask;
+import br.com.ada.pooii.projeto_final.model.StudyTask;
+import br.com.ada.pooii.projeto_final.model.WorkTask;
+import br.com.ada.pooii.projeto_final.repository.TaskRepository;
 
 import java.util.*;
 

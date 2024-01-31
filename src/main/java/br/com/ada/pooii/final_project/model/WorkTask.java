@@ -1,4 +1,4 @@
-package br.com.ada.pooii.projeto_final;
+package br.com.ada.pooii.projeto_final.model;
 
 public class WorkTask extends BaseTask <String>{
 

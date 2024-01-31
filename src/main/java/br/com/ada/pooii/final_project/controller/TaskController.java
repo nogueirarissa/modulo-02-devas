@@ -1,4 +1,8 @@
-package br.com.ada.pooii.projeto_final;
+package br.com.ada.pooii.projeto_final.controller;
+
+import br.com.ada.pooii.projeto_final.console.Console;
+import br.com.ada.pooii.projeto_final.service.TaskService;
+import br.com.ada.pooii.projeto_final.model.BaseTask;
 
 import java.util.List;
 import java.util.Scanner;
