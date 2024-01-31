@@ -96,7 +96,7 @@ public class TaskController <T> implements Console {
 
         viewAllTasksWithIndex(); // Display tasks with indices
 
-        System.out.println("Enter the index of the task to delete:");
+        System.out.println("Enter the id of the task to delete:");
 
         try {
             int index = Integer.parseInt(scanner.nextLine());
@@ -107,10 +107,10 @@ public class TaskController <T> implements Console {
             if (deleted) {
                 System.out.println("Task deleted successfully!");
             } else {
-                System.out.println("Invalid index. Task not found or couldn't be deleted.");
+                System.out.println("Invalid id. Task not found or couldn't be deleted.");
             }
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a valid index.");
+            System.out.println("Invalid input. Please enter a valid id.");
         }
     }
 
