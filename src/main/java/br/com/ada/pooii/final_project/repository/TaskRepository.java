@@ -1,6 +1,6 @@
-package br.com.ada.pooii.projeto_final.repository;
+package br.com.ada.pooii.final_project.repository;
 
-import br.com.ada.pooii.projeto_final.model.BaseTask;
+import br.com.ada.pooii.final_project.model.BaseTask;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package br.com.ada.pooii.projeto_final.console;
+package br.com.ada.pooii.final_project.console;
 
 import java.util.Scanner;
 

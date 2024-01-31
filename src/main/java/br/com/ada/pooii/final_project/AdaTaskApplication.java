@@ -1,8 +1,8 @@
-package br.com.ada.pooii.projeto_final;
+package br.com.ada.pooii.final_project;
 
-import br.com.ada.pooii.projeto_final.controller.TaskController;
-import br.com.ada.pooii.projeto_final.repository.TaskRepository;
-import br.com.ada.pooii.projeto_final.service.TaskService;
+import br.com.ada.pooii.final_project.controller.TaskController;
+import br.com.ada.pooii.final_project.repository.TaskRepository;
+import br.com.ada.pooii.final_project.service.TaskService;
 
 public class AdaTaskApplication {
 
