@@ -49,12 +49,14 @@ public class TaskService <T> {
 
         if (index >= 0 && index < tasks.size()) {
             BaseTask<?> removedTask = tasks.remove(index);
-            System.out.println("Task deleted successfully: " + removedTask.getTitle()+ viewAllTasks());
+            System.out.println("Chosen task to deletion: " + removedTask.getTitle() + " " + tasks.isEmpty());
+            taskRepository.setAllTasks(tasks);
             return true;
         } else {
             System.out.println("Invalid index. Task not found or couldn't be deleted.");
             return false;
         }
+
     }
     public List<String> viewAllTasksWithIndex() {
         List<BaseTask<?>> allTasks = taskRepository.getAllTasks();
@@ -65,7 +67,7 @@ public class TaskService <T> {
         } else {
             for (int i = 0; i < allTasks.size(); i++) {
                 BaseTask<?> task = allTasks.get(i);
-                String taskInfo = "Index: " + i + ", Title: " + task.getTitle() + ", Description: " + task.getDescription();
+                String taskInfo = "Id: " + i + " - Title: " + task.getTitle() + ", Description: " + task.getDescription();
                 taskDetails.add(taskInfo);
             }
         }
@@ -105,9 +107,6 @@ public class TaskService <T> {
         }
 
         return tasksWithTag;
-    }
-    public void setTasks(List<BaseTask<?>> tasks) {
-        taskRepository.setAllTasks(tasks);
     }
 
     }
