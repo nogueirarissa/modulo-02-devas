@@ -28,7 +28,7 @@ public class TaskController <T> implements Console {
                 case "3" -> deleteTask();
                 case "4" -> viewAllTasks();
                 case "5" -> searchTasksByTag();
-                case "6" -> System.out.println("Exiting AdaTask App. See you soon!");
+                case "6" -> {System.out.println("Exiting AdaTask App. See you soon!"); System.exit(0);}
                 default -> System.out.println("Invalid choice :( \nPlease try again.");
             }
 
